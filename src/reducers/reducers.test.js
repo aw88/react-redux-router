@@ -25,11 +25,31 @@ describe('definition reducer', () => {
     };
 
     const secondExpectedState = [
-      ...firstExpectedState,
+      new Definition(1, 'Definition title', [], []),
       new Definition(2, 'Another definition', [], [])
     ];
 
     expect(reducer(firstExpectedState, secondAction))
       .toEqual(secondExpectedState);
+  });
+
+  it('should handle UPDATE_DEFINITION action', () => {
+    const initialState = [
+      new Definition(1, 'Definition title', [], []),
+      new Definition(2, 'Another definition', [], [])
+    ];
+
+    const action = {
+      type: actions.UPDATE_DEFINITION,
+      id: 2,
+      definition: new Definition(2, 'Updated definition', ['term1'], ['term2'])
+    };
+
+    const expectedState = [
+      new Definition(1, 'Definition title', [], []),
+      new Definition(2, 'Updated definition', ['term1'], ['term2'])
+    ];
+
+    expect(reducer(initialState, action)).toEqual(expectedState);
   });
 });

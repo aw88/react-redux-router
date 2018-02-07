@@ -15,8 +15,15 @@ const definitions = (state = initialState, action) => {
       const index = state.findIndex(d => d.id === action.id);
 
       if (index >= 0) {
-        const newDefinition = new Definition(action.id, action.title, action.includedTerms, action.excludedTerms);
-        return [...state].splice(index, 1, newDefinition);
+        const newState = [...state];
+        const newDefinition = new Definition(
+          action.id,
+          action.definition.title,
+          action.definition.includedTerms,
+          action.definition.excludedTerms
+        );
+        newState.splice(index, 1, newDefinition);
+        return newState;
       } else {
         return state;
       }
