@@ -1,4 +1,4 @@
-import reducer from './reducers';
+import reducer from './definitions';
 import * as actions from '../actions';
 import Definition from '../models/Definition';
 
