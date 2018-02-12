@@ -10,10 +10,15 @@ import definitionsApp from './reducers';
 
 const store = createStore(definitionsApp);
 
-if (process.env.NODE_ENV !== 'production') {
+if (process.env.NODE_ENV === 'development') {
   store.subscribe(() => {
     console.log(store.getState());
   });
+
+  const { addDefinition } = require('./actions');
+  store.dispatch(addDefinition('First definition'))
+  store.dispatch(addDefinition('Second definition'))
+  store.dispatch(addDefinition('Third definition'))
 }
 
 ReactDOM.render(
