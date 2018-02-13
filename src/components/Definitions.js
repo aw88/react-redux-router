@@ -1,10 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import AddDefinition from './AddDefinition';
 import DefinitionListItem from './DefinitionListItem';
 
-const Definitions = ({ definitions }) => (
+export const Definitions = ({ definitions }) => (
   <div className="Definitions">
     <h2>Definitions</h2>
     <div className="Definitions__items">
@@ -13,6 +14,14 @@ const Definitions = ({ definitions }) => (
     <AddDefinition />
   </div>
 );
+
+Definitions.propTypes = {
+  definitions: PropTypes.array
+};
+
+Definitions.defaultProps = {
+  definitions: []
+};
 
 const mapStateToProps = state => {
   return {
