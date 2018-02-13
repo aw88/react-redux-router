@@ -1,9 +1,7 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
-import { addDefinition } from '../actions';
-
-const AddDefinition = ({ dispatch }) => {
+const AddDefinition = ({ onAddDefinition }) => {
   let input;
 
   const onSubmitHandler = e => {
@@ -11,7 +9,7 @@ const AddDefinition = ({ dispatch }) => {
     const trimmedTitle = input.value.trim();
 
     if (trimmedTitle) {
-      dispatch(addDefinition(trimmedTitle));
+      onAddDefinition(trimmedTitle);
       input.value = '';
     }
   }
@@ -28,4 +26,12 @@ const AddDefinition = ({ dispatch }) => {
   )
 }
 
-export default connect()(AddDefinition);
+AddDefinition.propTypes = {
+  onAddDefinition: PropTypes.func
+};
+
+AddDefinition.defaultProps = {
+  onAddDefinition: () => {}
+}
+
+export default AddDefinition;

@@ -5,28 +5,34 @@ import { connect } from 'react-redux';
 import AddDefinition from './AddDefinition';
 import DefinitionListItem from './DefinitionListItem';
 
-export const Definitions = ({ definitions }) => (
+import { addDefinition } from '../actions';
+
+export const Definitions = ({ definitions, onAddDefinition }) => (
   <div className="Definitions">
     <h2>Definitions</h2>
     <div className="Definitions__items">
       { definitions.map(d => <DefinitionListItem key={d.id} definition={d} />) }
     </div>
-    <AddDefinition />
+    <AddDefinition onAddDefinition={onAddDefinition}/>
   </div>
 );
 
 Definitions.propTypes = {
-  definitions: PropTypes.array
+  definitions: PropTypes.array,
+  onAddDefinition: PropTypes.func
 };
 
 Definitions.defaultProps = {
-  definitions: []
+  definitions: [],
+  onAddDefinition: () => {}
 };
 
-const mapStateToProps = state => {
-  return {
-    definitions: state.definitions
-  };
-};
+const mapStateToProps = state => ({
+  definitions: state.definitions
+});
 
-export default connect(mapStateToProps)(Definitions);
+const mapDispatchToProps = dispatch => ({
+  onAddDefinition: title => { console.log('wat'); dispatch(addDefinition(title)) }
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Definitions);
