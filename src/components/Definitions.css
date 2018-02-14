@@ -1,0 +1,15 @@
+.Definitions {
+  display: flex;
+  flex-direction: row;
+}
+
+.Definitions__items {
+  flex: 1;
+  max-width: 16em;
+  padding: 1em;
+}
+
+.Definitions__detail {
+  flex: 1;
+  padding: 1em;
+}

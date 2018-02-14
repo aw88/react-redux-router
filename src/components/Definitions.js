@@ -3,17 +3,23 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import AddDefinition from './AddDefinition';
+import DefinitionDetail from './DefinitionDetail';
 import DefinitionListItem from './DefinitionListItem';
 
-import { addDefinition } from '../actions';
+import { addDefinition, updateDefinition } from '../actions';
 
-export const Definitions = ({ definitions, onAddDefinition }) => (
+import './Definitions.css';
+
+export const Definitions = ({ definitions, onAddDefinition, updateDefinition }) => (
   <div className="Definitions">
-    <h2>Definitions</h2>
     <div className="Definitions__items">
       { definitions.map(d => <DefinitionListItem key={d.id} definition={d} />) }
+      <hr/>
+      <AddDefinition onAddDefinition={onAddDefinition}/>
     </div>
-    <AddDefinition onAddDefinition={onAddDefinition}/>
+    <div className="Definitions__detail">
+      <DefinitionDetail definition={definitions[0]} updateDefinition={updateDefinition}/>
+    </div>
   </div>
 );
 
@@ -32,7 +38,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onAddDefinition: title => { console.log('wat'); dispatch(addDefinition(title)) }
+  onAddDefinition: title => dispatch(addDefinition(title)),
+  updateDefinition: (id, definition) => dispatch(updateDefinition(id, definition)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Definitions);
